@@ -1,0 +1,31 @@
+.syllabus-content-buttons {
+  display: flex;
+  gap: 15px;
+  margin-top: 40px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.syllabus-content-download-link,
+.syllabus-content-view-link {
+  background-color: #03045e;
+  color: white;
+  padding: 9px 14px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 700;
+  width: 160px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+
+.syllabus-content-download-link:hover,
+.syllabus-content-view-link:hover {
+  background-color: #fca311;
+  color: white;
+}

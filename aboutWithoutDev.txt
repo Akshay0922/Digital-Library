@@ -1,0 +1,303 @@
+-----------------------------------About Without Dev
+
+
+
+// import { useEffect, useRef, useState } from "react";
+// import { FaArrowUp } from "react-icons/fa";
+
+// import BookTop from "../../assets/books/bookTop.png";
+// import Ball from "../../assets/ball.png";
+// import Chairman from "../../assets/aboutPeoples/chairman.png";
+// import GeneralSecretary from "../../assets/aboutPeoples/generalSecretary.png";
+// import Director from "../../assets/aboutPeoples/director.png";
+
+// import "./about.css";
+// import "../../../public/styles/common.css";
+
+// const mainData = [
+//   {
+//     title: "MAIMT Foundation",
+//     content:
+//       "Founded in 1997 during India's Golden Jubilee of Independence, MAIMT is the result of Maharaja Agrasen's vision. Affiliated with Kurukshetra University and approved by AICTE, it aims to provide quality education in management and technology.",
+//     align: "left",
+//   },
+//   {
+//     title: "Our Mission",
+//     content:
+//       "To serve society by spreading awareness, uplifting living standards, and fulfilling educational responsibilities through professional excellence.",
+//     align: "right",
+//   },
+//   {
+//     title: "Our Roots",
+//     content:
+//       "Established as a charitable and non-profit institution, MAIMT's foundation lies in the vision of Maharaja Agrasen Sabha, originally providing education through Maharaja Agrasen College in commerce, arts, and computers.",
+//     align: "left",
+//   },
+//   {
+//     title: "Course Expansion",
+//     content:
+//       "MAIMT expanded its educational offerings by starting MBA and MCA programs. It continues to evolve and grow under dedicated leadership and governance.",
+//     align: "right",
+//   },
+//   {
+//     title: "Leadership & Vision",
+//     content:
+//       "The institute is led by Sh. Sushil Gupta (President), Sh. Praveen Goel (Vice President), Dr. Ashwini Goel (General Secretary), and Sh. Pawan Kumar Garg (Finance Secretary), all committed to continuous development of charitable institutions.",
+//     align: "left",
+//   },
+//   {
+//     type: "image-card",
+//     align: "right",
+//     image: Chairman,
+//     name: "Sh. Sushil Gupta",
+//     position: "Chairman",
+//   },
+//   {
+//     type: "image-card",
+//     align: "left",
+//     image: GeneralSecretary,
+//     name: "Dr. Ashwani Goel",
+//     position: "General Secretary",
+//   },
+//   {
+//     type: "image-card",
+//     align: "right",
+//     image: Director,
+//     name: "Dr. Narinder Rana",
+//     position: "Director, MAIMT",
+//   },
+// ];
+
+// export const About = () => {
+//   const arrowStartRef = useRef(null);
+//   const arrowEndRef = useRef(null);
+//   const arrowLineRef = useRef(null);
+//   const arrowHeadRef = useRef(null);
+//   const arrowContainerRef = useRef(null);
+//   const cardRefs = useRef([]);
+//   const [scrollProgress, setScrollProgress] = useState(0);
+//   const [showTopBtn, setShowTopBtn] = useState(false);
+//   const [visible, setVisible] = useState(Array(mainData.length).fill(false));
+//   const [animate, setAnimate] = useState(false);
+
+//   useEffect(() => {
+//     setTimeout(() => {
+//       setAnimate(true);
+//     }, 100);
+//   }, []);
+
+//   useEffect(() => {
+//     const handleScroll = () => {
+//       if (
+//         !arrowStartRef.current ||
+//         !arrowEndRef.current ||
+//         !arrowLineRef.current ||
+//         !arrowContainerRef.current ||
+//         !arrowHeadRef.current
+//       )
+//         return;
+
+//       const startY = arrowStartRef.current.getBoundingClientRect().top + window.scrollY;
+//       const endY = arrowEndRef.current.getBoundingClientRect().top + window.scrollY - 350;
+//       const totalHeight = endY - startY;
+//       const scrollY = window.scrollY;
+//       const progress = Math.min(1, Math.max(0, (scrollY - startY) / totalHeight));
+//       const lineHeight = progress * totalHeight;
+
+//       arrowContainerRef.current.style.top = `${startY + 267}px`;
+//       arrowLineRef.current.style.height = scrollY > startY + 50 ? `${lineHeight}px` : `0px`;
+//       arrowHeadRef.current.style.top = `${lineHeight - 10}px`;
+
+//       const newVisible = mainData.map((_, i) => {
+//         const card = cardRefs.current[i];
+//         if (!card) return false;
+//         const cardTop = card.offsetTop;
+//         return lineHeight + startY > cardTop + 100;
+//       });
+
+//       setVisible(newVisible);
+//       setScrollProgress(progress * 100);
+//       setShowTopBtn(scrollY > 100);
+//     };
+
+//     window.addEventListener("scroll", handleScroll);
+//     window.addEventListener("resize", handleScroll);
+//     handleScroll();
+
+//     return () => {
+//       window.removeEventListener("scroll", handleScroll);
+//       window.removeEventListener("resize", handleScroll);
+//     };
+//   }, []);
+
+//   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
+
+//   return (
+//     <div className="main-container">
+//       <section className="hero-section" ref={arrowStartRef}>
+//         <img className="ball" src={Ball} alt="Ball" />
+//         <img className="book-top" src={BookTop} alt="Top Book" />
+//         <h1 className={`hero-heading ${animate ? "animate-heading" : ""}`}>
+//           About MAIMT
+//         </h1>
+//         <p className={`hero-subtext ${animate ? "animate-subtext" : ""}`}>
+//           Explore MAIMT's founding story, mission, leadership, and commitment to educational excellence.
+//         </p>
+//         <div className="scroll-indicator">Scroll Down ↓</div>
+//       </section>
+
+//       <div className="arrow-container" ref={arrowContainerRef}>
+//         <div className="arrow-line" ref={arrowLineRef}></div>
+//         <div className="arrow-head" ref={arrowHeadRef}>▼</div>
+//       </div>
+
+//       <section className="timeline-section">
+//         {mainData.map((item, index) => (
+//           <div
+//             key={index}
+//             ref={(el) => (cardRefs.current[index] = el)}
+//             className={`about-card ${item.align} ${visible[index] ? "visible expanded" : ""}`}
+//           >
+//             {item.type === "image-card" ? (
+//               <div className="about-card-inner image-layout">
+//                 {item.align === "left" ? (
+//                   <>
+//                     <div className="about-image-wrapper">
+//                       <img src={item.image} alt={item.name} className="about-image" />
+//                     </div>
+//                     <div className="about-text-wrapper">
+//                       <div className="about-title">{item.name}</div>
+//                       <div className="about-content">{item.position}</div>
+//                     </div>
+//                   </>
+//                 ) : (
+//                   <>
+//                     <div className="about-text-wrapper">
+//                       <div className="about-title">{item.name}</div>
+//                       <div className="about-content">{item.position}</div>
+//                     </div>
+//                     <div className="about-image-wrapper">
+//                       <img src={item.image} alt={item.name} className="about-image" />
+//                     </div>
+//                   </>
+//                 )}
+//               </div>
+//             ) : (
+//               <>
+//                 <div className="about-title">{item.title}</div>
+//                 <div className="about-content">{item.content}</div>
+//               </>
+//             )}
+//           </div>
+//         ))}
+//         <div ref={arrowEndRef} className="about-timeline-end-spacer"></div>
+//       </section>
+
+//       {showTopBtn && (
+//         <div className="scroll-to-top" onClick={scrollToTop}>
+//           <div className="scroll-to-top-inner">
+//             <svg className="wave-svg" viewBox="0 0 60 60">
+//               <defs>
+//                 <clipPath id="waveClip">
+//                   <circle cx="30" cy="30" r="28" />
+//                 </clipPath>
+//               </defs>
+//               <g clipPath="url(#waveClip)">
+//                 <rect
+//                   className="wave-fill"
+//                   y={`${100 - scrollProgress}%`}
+//                   width="60"
+//                   height="100%"
+//                 />
+//               </g>
+//               <circle
+//                 cx="30"
+//                 cy="30"
+//                 r="28"
+//                 stroke="#03045e"
+//                 strokeWidth="3"
+//                 fill="none"
+//               />
+//             </svg>
+//             <FaArrowUp
+//               className="top-icon"
+//               style={{
+//                 color: scrollProgress > 45 ? "white" : "#03045e",
+//               }}
+//             />
+//           </div>
+//         </div>
+//       )}
+//     </div>
+//   );
+// };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-------------------------------Simple Home
+
+import { useEffect, useRef } from "react";
+import "./home.css";
+import { Link } from "react-router-dom";
+
+import HomeImage from '../../assets/homeImage.png';
+import HomeCircleImage from '../../assets/homeCircleImage.png';
+import Ball from "../../assets/ball.png";
+
+export const Home = () => {
+  const imageRef = useRef(null);
+  const heroRef = useRef(null);
+
+  useEffect(() => {
+    if (imageRef.current) {
+      setTimeout(() => imageRef.current.classList.add("animate"), 100);
+    }
+    if (heroRef.current) {
+      setTimeout(() => heroRef.current.classList.add("animate"), 200);
+    }
+  }, []);
+
+  return (
+    <div className="home-wrapper">
+      <img className="home-ball" src={Ball} alt="Ball" />
+
+      <div className="home-top-part">
+        <img ref={imageRef} className="home-image" src={HomeImage} alt='Home Image' />
+        <section ref={heroRef} className="home-hero">
+          <h1>Welcome to</h1>
+          <h2>MAIMT Digital Library</h2>
+          <p>Your academic resources, just one click away.</p>
+          <div className="hero-buttons">
+            <Link to="/syllabus">📚 Syllabus</Link>
+            <Link to="/paper">📄 Previous Year Papers</Link>
+          </div>
+        </section>
+      </div>
+
+      <section className="quick-links">
+        <img className="home-circle-image" src={HomeCircleImage} alt="Home Circle Image" />
+        <Link to="/about" className="quick-card">🏫 About MAIMT</Link>
+        <Link to="/rules" className="quick-card">📑 Rules & Regulations</Link>
+        <Link to="/econtent" className="quick-card">📱 E Content</Link>
+        <Link to="/syllabus" className="quick-card">📚 Syllabus</Link>
+        <Link to="/paper" className="quick-card">📄 Previous Papers</Link>
+        <Link to="/contactus" className="quick-card">💌 Contact Us</Link>
+      </section>
+    </div>
+  );
+};

@@ -1,0 +1,71 @@
+.rules-card {
+  margin: 50px auto;
+  padding: 1rem 1.5rem;
+  width: 70%;
+  max-width: 500px;
+  border-radius: 12px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  transform: scale(0.97);
+  opacity: 0;
+  transform: translateY(100px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  background: #ffd6e0;
+}
+
+.rules-card.left {
+  margin-left: 90px;
+  margin-right: auto;
+  border-left: 6px solid #00b4d8;
+  background: linear-gradient(135deg, #b2ebf2, #e0f7fa);
+  text-align: left;
+}
+
+.rules-card.right {
+  margin-right: 90px;
+  margin-left: auto;
+  border-right: 6px solid #ff80ab;
+  background: linear-gradient(135deg, #ffe4ef, #ffc1e3);
+  text-align: right;
+}
+
+.rules-card.visible {
+  animation: rollOpen 0.7s ease-out forwards;
+}
+
+@keyframes rollOpen {
+  from {
+    transform: translateY(100px) rotateX(90deg) scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) rotateX(0deg) scale(1);
+    opacity: 1;
+  }
+}
+
+.rules-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #111;
+}
+
+.rules-content {
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.6s ease, opacity 0.6s ease;
+  font-size: 0.95rem;
+  margin-top: 0.5rem;
+  line-height: 1.6;
+  overflow: hidden;
+}
+
+.rules-card.expanded .rules-content {
+  max-height: 300px;
+  opacity: 1;
+}
+
+.rules-timeline-end-spacer {
+    height: 150px;
+}
