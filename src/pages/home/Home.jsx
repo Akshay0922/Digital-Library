@@ -7,10 +7,10 @@ import HomeImage from '../../assets/homeImage.png';
 import HomeCircleImage from '../../assets/homeCircleImage.png';
 import Ball from "../../assets/ball.png";
 
-import mcaIcon from '../../assets/eContent/mca.png';
-import mbaIcon from '../../assets/eContent/mba.png';
-import bbaIcon from '../../assets/eContent/bba.png';
-import bcaIcon from '../../assets/eContent/bca.png';
+import mcaIcon from '../../assets/eContent/MCA.png';
+import mbaIcon from '../../assets/eContent/MBA.png';
+import bbaIcon from '../../assets/eContent/BBA.png';
+import bcaIcon from '../../assets/eContent/BCA.png';
 
 import "./home.css";
 import '../../styles/common.css';
